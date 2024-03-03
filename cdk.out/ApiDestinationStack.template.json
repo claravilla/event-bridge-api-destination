@@ -27,7 +27,7 @@
     },
     "Description": "Api destination for Slack Webhook",
     "HttpMethod": "POST",
-    "InvocationEndpoint": "https://hooks.slack.com/services/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"
+    "InvocationEndpoint": "https://hooks.slack.com/services/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"
    },
    "Metadata": {
     "aws:cdk:path": "ApiDestinationStack/SlackWebhookDestination/ApiDestination"
@@ -115,7 +115,7 @@
        "InputPathsMap": {
         "detail-alarmName": "$.detail.alarmName"
        },
-       "InputTemplate": "{\"text\":\"🔥 <detail-alarmName> has just triggered 🔥\"}"
+       "InputTemplate": "{\"text\":\"🔥 <detail-alarmName> has just been triggered 🔥\"}"
       },
       "RoleArn": {
        "Fn::GetAtt": [
@@ -133,7 +133,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12MTQqDMBCFz+I+To2rbos9QEkPIGmcwvgzKU5USsjdS7AF6ep773vD1KDrM1SF3aR03VCO9IB4D9YNym7SRlyRg0BsPDO6QJ5V8+RDu7zoihKI7W/8M2YZMevMpMhOEI3/qsybH8m9c91TSsqg+GV2+80hN547yk+TYt8h9HJa6wq0Bl30QlTOCweaEMzOD+ATZhrdAAAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12MTQrCMBCFz9J9Opqu6lLqASQeQGI6wvRnRpq0RULuLqEKxdX33veGqUBXNRwLu/rStX050APiLVjXK7v6e8QFOXiIjTCjCySsmifv2vlFF/SB2P7GP2PmAbPOTIrsCNHIV2VeZSD3znVLKSmDXubJbTe73Ai3lJ8mxdIidP6w6Br0CXTReaJymjnQiGA2fgDz/jcI3QAAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "ApiDestinationStack/CDKMetadata/Default"

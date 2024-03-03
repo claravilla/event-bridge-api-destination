@@ -57,7 +57,7 @@
                     },
                     "description": "Api destination for Slack Webhook",
                     "httpMethod": "POST",
-                    "invocationEndpoint": "https://hooks.slack.com/services/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"
+                    "invocationEndpoint": "https://hooks.slack.com/services/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"
                   }
                 },
                 "constructInfo": {
@@ -201,7 +201,7 @@
                           ]
                         },
                         "inputTransformer": {
-                          "inputTemplate": "{\"text\":\"🔥 <detail-alarmName> has just triggered 🔥\"}",
+                          "inputTemplate": "{\"text\":\"🔥 <detail-alarmName> has just been triggered 🔥\"}",
                           "inputPathsMap": {
                             "detail-alarmName": "$.detail.alarmName"
                           }

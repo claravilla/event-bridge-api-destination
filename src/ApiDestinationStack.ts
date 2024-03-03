@@ -13,7 +13,8 @@ export default class ApiDestinationStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const webhook = process.env.SLACK_WEBHOOK;
+    const webhook =
+      "https://hooks.slack.com/services/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";
 
     if (webhook === undefined) {
       throw new Error("The webhook url is undefinded");
@@ -53,7 +54,7 @@ export default class ApiDestinationStack extends Stack {
         event: RuleTargetInput.fromObject({
           text: `🔥 ${EventField.fromPath(
             "$.detail.alarmName"
-          )} has just triggered 🔥`,
+          )} has just been triggered 🔥`,
         }),
       })
     );
