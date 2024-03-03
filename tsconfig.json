@@ -1,0 +1,8 @@
+{
+  "exclude": ["cdk.out", "node_modules"],
+  "extends": "./node_modules/@tsconfig/node20/tsconfig.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "resolveJsonModule": true
+  }
+}

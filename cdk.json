@@ -1,0 +1,19 @@
+{
+  "app": "npx tsx --env-file=.env src/index.ts",
+  "watch": {
+    "include": ["**"],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "**/*.log",
+      "**/*.d.ts",
+      "**/*.js",
+      "outputs.json",
+      "tsconfig.json",
+      "package*.json",
+      "package-lock.json",
+      "node_modules",
+      "**/__tests__"
+    ]
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "ApiDestinationStack": {
+        "id": "ApiDestinationStack",
+        "path": "ApiDestinationStack",
+        "children": {
+          "apiConnection": {
+            "id": "apiConnection",
+            "path": "ApiDestinationStack/apiConnection",
+            "children": {
+              "Connection": {
+                "id": "Connection",
+                "path": "ApiDestinationStack/apiConnection/Connection",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Connection",
+                  "aws:cdk:cloudformation:props": {
+                    "authorizationType": "BASIC",
+                    "authParameters": {
+                      "basicAuthParameters": {
+                        "username": "Slack",
+                        "password": "Secret password"
+                      }
+                    },
+                    "description": "Connection for Slack Webhook"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnConnection",
+                  "version": "2.128.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.Connection",
+              "version": "2.128.0"
+            }
+          },
+          "SlackWebhookDestination": {
+            "id": "SlackWebhookDestination",
+            "path": "ApiDestinationStack/SlackWebhookDestination",
+            "children": {
+              "ApiDestination": {
+                "id": "ApiDestination",
+                "path": "ApiDestinationStack/SlackWebhookDestination/ApiDestination",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::ApiDestination",
+                  "aws:cdk:cloudformation:props": {
+                    "connectionArn": {
+                      "Fn::GetAtt": [
+                        "apiConnection37262EA6",
+                        "Arn"
+                      ]
+                    },
+                    "description": "Api destination for Slack Webhook",
+                    "httpMethod": "POST",
+                    "invocationEndpoint": "https://hooks.slack.com/services/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"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnApiDestination",
+                  "version": "2.128.0"
+                }
+              },
+              "EventsRole": {
+                "id": "EventsRole",
+                "path": "ApiDestinationStack/SlackWebhookDestination/EventsRole",
+                "children": {
+                  "ImportEventsRole": {
+                    "id": "ImportEventsRole",
+                    "path": "ApiDestinationStack/SlackWebhookDestination/EventsRole/ImportEventsRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.128.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "ApiDestinationStack/SlackWebhookDestination/EventsRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "events.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.128.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "ApiDestinationStack/SlackWebhookDestination/EventsRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "ApiDestinationStack/SlackWebhookDestination/EventsRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "events:InvokeApiDestination",
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "SlackWebhookDestinationApiDestination5F155A83",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "SlackWebhookDestinationEventsRoleDefaultPolicyC9B8334C",
+                            "roles": [
+                              {
+                                "Ref": "SlackWebhookDestinationEventsRoleC913F540"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.128.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.128.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.128.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.ApiDestination",
+              "version": "2.128.0"
+            }
+          },
+          "alarmRule": {
+            "id": "alarmRule",
+            "path": "ApiDestinationStack/alarmRule",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "ApiDestinationStack/alarmRule/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                  "aws:cdk:cloudformation:props": {
+                    "eventPattern": {
+                      "source": [
+                        "aws.cloudwatch"
+                      ],
+                      "detail": {
+                        "alarmName": [
+                          "TestAlarm"
+                        ],
+                        "state": {
+                          "value": [
+                            "ALARM"
+                          ]
+                        }
+                      }
+                    },
+                    "name": "test-alarm-rule",
+                    "state": "ENABLED",
+                    "targets": [
+                      {
+                        "id": "Target0",
+                        "arn": {
+                          "Fn::GetAtt": [
+                            "SlackWebhookDestinationApiDestination5F155A83",
+                            "Arn"
+                          ]
+                        },
+                        "roleArn": {
+                          "Fn::GetAtt": [
+                            "SlackWebhookDestinationEventsRoleC913F540",
+                            "Arn"
+                          ]
+                        },
+                        "inputTransformer": {
+                          "inputTemplate": "{\"text\":\"🔥 <detail-alarmName> has just triggered 🔥\"}",
+                          "inputPathsMap": {
+                            "detail-alarmName": "$.detail.alarmName"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_events.CfnRule",
+                  "version": "2.128.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_events.Rule",
+              "version": "2.128.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "ApiDestinationStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "ApiDestinationStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.128.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "ApiDestinationStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.128.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.3.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "ApiDestinationStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.128.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "ApiDestinationStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.128.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.128.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.3.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.128.0"
+    }
+  }
+}
