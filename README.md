@@ -7,7 +7,7 @@ It leverages the API destination functionality of EventBridge and the Cloudwatch
 
 Clone the repo  
 Run `npm install`  
-Add a .env file with SLACK_WEBHOOK={your SLACK webhook}
+Add a .env file with SLACK_WEBHOOK={your SLACK webhook}  
 Run `cdk deploy`
 
 ## Built with
