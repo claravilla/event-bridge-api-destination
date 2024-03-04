@@ -46,16 +46,15 @@ export default class ApiDestinationStack extends Stack {
           },
         },
       },
-    });
-
-    alarmRule.addTarget(
-      new ApiTarget(apiDestination, {
-        event: RuleTargetInput.fromObject({
-          text: `🔥 ${EventField.fromPath(
-            "$.detail.alarmName"
-          )} has just been triggered 🔥`,
+      targets: [
+        new ApiTarget(apiDestination, {
+          event: RuleTargetInput.fromObject({
+            text: `🔥 ${EventField.fromPath(
+              "$.detail.alarmName"
+            )} has just been triggered 🔥`,
+          }),
         }),
-      })
-    );
+      ],
+    });
   }
 }
