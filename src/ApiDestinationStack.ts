@@ -13,8 +13,7 @@ export default class ApiDestinationStack extends Stack {
   constructor(scope: App, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const webhook =
-      "https://hooks.slack.com/services/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";
+    const { SLACK_WEBHOOK: webhook } = process.env;
 
     if (webhook === undefined) {
       throw new Error("The webhook url is undefinded");
