@@ -57,7 +57,7 @@
                     },
                     "description": "Api destination for Slack Webhook",
                     "httpMethod": "POST",
-                    "invocationEndpoint": "https://hooks.slack.com/services/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"
+                    "invocationEndpoint": "https://hooks.slack.com/services/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"
                   }
                 },
                 "constructInfo": {
@@ -174,7 +174,7 @@
                       ],
                       "detail": {
                         "alarmName": [
-                          "TestAlarm"
+                          "Lambda-Bla-4xx-Alarm"
                         ],
                         "state": {
                           "value": [

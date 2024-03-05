@@ -35,12 +35,12 @@ export default class ApiDestinationStack extends Stack {
       description: "Api destination for Slack Webhook",
     });
 
-    const alarmRule = new Rule(this, "alarmRule", {
+    new Rule(this, "alarmRule", {
       ruleName: "test-alarm-rule",
       eventPattern: {
         source: ["aws.cloudwatch"],
         detail: {
-          alarmName: ["TestAlarm"],
+          alarmName: ["Lambda-Bla-4xx-Alarm"],
           state: {
             value: ["ALARM"],
           },
